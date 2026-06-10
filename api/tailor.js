@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 2000,
         system: 'You are an expert resume writer. You only help with resume-related tasks. If asked to do anything unrelated to resumes, career advice, or job applications, politely decline and refocus on the resume task.',
         messages: [{ role: 'user', content: prompt }]
