@@ -77,18 +77,18 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .center { text-align: center; margin: 24px 0; }
     .tip { font-size: 12px; color: var(--ink3); margin-top: 8px; }
- 
+
     /* LOADING STATUS */
     .loading-status { text-align: center; font-size: 13px; color: var(--accent); margin-top: 12px; display: none; animation: pulse 1.5s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
- 
+
     #result-section { display: none; animation: fadeUp 0.4s ease; }
     @keyframes fadeUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: none; } }
- 
+
     /* TRUST BADGE */
     .trust-badge { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--ink3); margin-top: 10px; }
     .trust-badge span { color: var(--accent); }
- 
+
     .resume-output { background: #fff; border-radius: var(--radius); border: 1px solid var(--paper3); box-shadow: var(--shadow); overflow: hidden; }
     .resume-header { background: var(--paper2); padding: 24px 28px; border-bottom: 1px solid var(--paper3); }
     .resume-name { font-family: 'Instrument Serif', serif; font-size: 26px; margin-bottom: 3px; }
@@ -97,7 +97,7 @@
     .resume-contact { font-size: 12px; color: var(--ink3); }
     .ats-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--accent-light); color: var(--accent); border-radius: 99px; padding: 4px 12px; font-size: 12px; font-weight: 600; border: 1px solid #b8dece; margin-top: 10px; }
     .resume-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 22px; }
- 
+
     /* SECTION HEADERS WITH EDIT */
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
     .resume-section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); display: flex; align-items: center; gap: 6px; flex: 1; }
@@ -105,23 +105,23 @@
     .edit-btn { background: none; border: 1px solid var(--paper3); border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 500; color: var(--ink3); cursor: pointer; transition: all 0.15s; white-space: nowrap; margin-left: 10px; flex-shrink: 0; }
     .edit-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
     .edit-btn.saving { color: var(--accent); border-color: var(--accent); }
- 
+
     /* EDITABLE FIELDS */
     .editable-text { font-size: 13.5px; line-height: 1.7; color: var(--ink2); }
     .editable-textarea { width: 100%; border: 1.5px solid var(--accent); border-radius: 8px; padding: 10px 12px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--ink2); background: #fff; outline: none; resize: vertical; line-height: 1.7; display: none; }
     .editable-input { width: 100%; border: 1.5px solid var(--accent); border-radius: 6px; padding: 6px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink2); background: #fff; outline: none; display: none; }
- 
+
     .strength-tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .strength-tag { font-size: 12px; padding: 5px 12px; border-radius: 99px; background: var(--paper); border: 1px solid var(--paper3); color: var(--ink2); }
     .strength-tag.editable-mode { cursor: pointer; border-color: var(--accent); position: relative; }
     .strength-tag.editable-mode::after { content: ' ×'; color: var(--accent); font-weight: 600; }
     .add-strength-input { border: 1.5px dashed var(--paper3); border-radius: 99px; padding: 5px 12px; font-size: 12px; font-family: 'DM Sans', sans-serif; outline: none; display: none; width: 120px; }
     .add-strength-input:focus { border-color: var(--accent); }
- 
+
     .skills-grid { display: grid; grid-template-columns: 120px 1fr; gap: 8px; }
     .skill-cat-label { font-size: 12px; color: var(--ink3); padding-top: 2px; }
     .skill-cat-value { font-size: 13px; color: var(--ink2); }
- 
+
     .exp-entry { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--paper2); }
     .exp-entry:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
     .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
@@ -132,22 +132,22 @@
     .exp-bullets li { font-size: 13px; color: var(--ink2); line-height: 1.6; }
     .exp-bullets li.editable-mode { list-style: none; margin-left: -16px; }
     .exp-bullets li.editable-mode input { width: 100%; border: 1px solid var(--accent); border-radius: 6px; padding: 4px 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink2); background: #fff; outline: none; }
- 
+
     .edu-entry { display: flex; justify-content: space-between; align-items: flex-start; }
     .edu-degree { font-size: 14px; font-weight: 500; color: var(--ink); }
     .edu-school { font-size: 12px; color: var(--ink3); }
     .edu-date { font-size: 12px; color: var(--ink3); }
- 
+
     .action-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
     .btn-sec { flex: 1; min-width: 120px; padding: 10px 18px; border-radius: 8px; border: 1.5px solid var(--paper3); background: #fff; color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
     .btn-sec:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
     .btn-pri { flex: 1; min-width: 120px; padding: 10px 18px; border-radius: 8px; border: none; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
     .btn-pri:hover { background: var(--accent2); }
- 
+
     .error-msg { background: #fce4ec; color: #c62828; border-radius: 8px; padding: 12px 16px; font-size: 13px; margin-top: 12px; display: none; border: 1px solid #f5c6cb; }
     footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--paper3); color: var(--ink3); font-size: 12px; }
     footer a { color: var(--accent); text-decoration: none; }
- 
+
     @media (max-width: 640px) {
       .form-grid, .two-col { grid-template-columns: 1fr; }
       .form-full { grid-column: 1; }
@@ -160,17 +160,17 @@
   </style>
 </head>
 <body>
- 
+
 <nav>
   <a class="logo" href="/">Resume<span>AI</span></a>
   <button class="nav-pill">Sign up free</button>
 </nav>
- 
+
 <div class="mode-bar">
   <button class="mode-btn active" onclick="setMode('build')">✦ Build from scratch</button>
   <button class="mode-btn" onclick="setMode('tailor')">⟳ Tailor existing resume</button>
 </div>
- 
+
 <main>
   <div class="page active" id="page-build">
     <div class="hero">
@@ -226,7 +226,7 @@
       <input type="text" id="skill-input" placeholder="e.g. SQL, Figma, Agile..." onkeydown="addSkill(event)">
       <div class="skill-tags" id="skill-tags"></div>
     </div>
- 
+
     <div class="card">
       <div class="card-title"><div class="card-title-icon">＋</div> Additional sections <span style="font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px;">optional</span></div>
       <div id="custom-sections-list"></div>
@@ -244,14 +244,15 @@
       <button class="build-btn" id="build-btn" onclick="buildResume()">
         <div class="spinner"></div>
         <span class="btn-text">Build my resume</span>
-        <span style="font-size:16px">✦</span>
+        <span style="font-size:16px">→</span>
       </button>
       <div class="trust-badge">🔒 <span>We never store your data</span></div>
+      <div style="font-size:11px;color:var(--ink3);margin-top:6px;">Builds instantly from your info · Polish with AI after</div>
       <div id="build-loading" class="loading-status"></div>
     </div>
     <div id="build-error" class="error-msg"></div>
   </div>
- 
+
   <div class="page" id="page-tailor">
     <div class="hero">
       <h1>Tailor your resume <em>instantly</em></h1>
@@ -278,7 +279,7 @@
     </div>
     <div id="tailor-error" class="error-msg"></div>
   </div>
- 
+
   <div id="result-section">
     <div class="resume-output">
       <div class="resume-header">
@@ -288,7 +289,7 @@
         <div class="ats-badge">✦ ATS score: <span id="r-ats">—</span></div>
       </div>
       <div class="resume-body">
- 
+
         <!-- PROFILE -->
         <div>
           <div class="section-header">
@@ -298,7 +299,7 @@
           <div class="editable-text" id="r-profile"></div>
           <textarea class="editable-textarea" id="r-profile-edit" rows="4"></textarea>
         </div>
- 
+
         <!-- STRENGTHS -->
         <div>
           <div class="section-header">
@@ -308,7 +309,7 @@
           <div class="strength-tags" id="r-strengths"></div>
           <input class="add-strength-input" id="r-strengths-add" placeholder="Add strength..." onkeydown="addStrength(event)">
         </div>
- 
+
         <!-- SKILLS -->
         <div>
           <div class="section-header">
@@ -317,7 +318,7 @@
           </div>
           <div class="skills-grid" id="r-skills"></div>
         </div>
- 
+
         <!-- EXPERIENCE -->
         <div>
           <div class="section-header">
@@ -326,7 +327,7 @@
           </div>
           <div id="r-experience"></div>
         </div>
- 
+
         <!-- EDUCATION -->
         <div>
           <div class="section-header">
@@ -335,10 +336,18 @@
           </div>
           <div id="r-education"></div>
         </div>
- 
+
         <!-- CUSTOM SECTIONS -->
         <div id="r-custom-sections"></div>
- 
+
+      </div>
+    </div>
+    <div id="polish-btn-wrap" style="display:none; margin-top: 16px; background: var(--accent-light); border: 1px solid #b8dece; border-radius: var(--radius); padding: 16px 20px; display: none;">
+      <div style="font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 6px;">✦ Want to make it even better?</div>
+      <div style="font-size: 12px; color: var(--ink3); margin-bottom: 12px;">Let AI polish your wording, strengthen your bullet points, and write a professional summary.</div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <button class="btn-pri" id="polish-btn" onclick="polishWithAI()" style="flex: none;">✦ Polish with AI</button>
+        <div id="polish-loading" style="display:none; font-size: 12px; color: var(--accent); animation: pulse 1.5s ease-in-out infinite;">Polishing your resume...</div>
       </div>
     </div>
     <div class="action-row">
@@ -348,17 +357,17 @@
     </div>
   </div>
 </main>
- 
+
 <footer>
   <p>© 2026 ResumeAI · <a href="#">Privacy Policy</a> · <a href="#">Terms</a> · 🔒 Your data is never stored</p>
 </footer>
- 
+
 <script>
   let skills = [];
   let expCount = 1;
   let resultData = {};
   let editStates = {};
- 
+
   const loadingMessages = [
     'Analyzing your resume...',
     'Matching keywords to the job...',
@@ -366,14 +375,14 @@
     'Optimizing for ATS...',
     'Almost there...'
   ];
- 
+
   function setMode(mode) {
     document.querySelectorAll('.mode-btn').forEach((b, i) => b.classList.toggle('active', (mode === 'build' && i === 0) || (mode === 'tailor' && i === 1)));
     document.getElementById('page-build').classList.toggle('active', mode === 'build');
     document.getElementById('page-tailor').classList.toggle('active', mode === 'tailor');
     document.getElementById('result-section').style.display = 'none';
   }
- 
+
   function addSkill(e) {
     if (e.key !== 'Enter') return;
     const val = e.target.value.trim();
@@ -382,18 +391,18 @@
     renderSkillTags();
     e.target.value = '';
   }
- 
+
   function removeSkillTag(skill) {
     skills = skills.filter(s => s !== skill);
     renderSkillTags();
   }
- 
+
   function renderSkillTags() {
     document.getElementById('skill-tags').innerHTML = skills.map(s =>
       `<div class="skill-tag">${s}<button onclick="removeSkillTag('${s}')" aria-label="Remove ${s}">×</button></div>`
     ).join('');
   }
- 
+
   function addExp() {
     const list = document.getElementById('exp-list');
     const div = document.createElement('div');
@@ -416,12 +425,12 @@
     list.appendChild(div);
     expCount++;
   }
- 
+
   function removeExp(id) {
     const el = document.getElementById(`exp-${id}`);
     if (el) el.remove();
   }
- 
+
   function getExpData() {
     return Array.from(document.querySelectorAll('.exp-item')).map(item => ({
       role: item.querySelector('.exp-role')?.value || '',
@@ -432,7 +441,7 @@
       desc: item.querySelector('.exp-desc')?.value || ''
     })).filter(e => e.role || e.company);
   }
- 
+
   function toggleCurrentWork(btn) {
     const endInput = btn.closest('.form-grid').querySelector('.exp-end');
     btn.classList.toggle('active');
@@ -447,18 +456,18 @@
       endInput.style.opacity = '1';
     }
   }
- 
+
   function showError(id, msg) {
     const el = document.getElementById(id);
     el.textContent = msg;
     el.style.display = 'block';
   }
- 
+
   // ── EDITABLE SECTIONS ────────────────────────────────────────────────
   function toggleEdit(section) {
     const btn = document.querySelector(`[onclick="toggleEdit('${section}')"]`);
     const isEditing = editStates[section];
- 
+
     if (section === 'profile') {
       const display = document.getElementById('r-profile');
       const editor = document.getElementById('r-profile-edit');
@@ -478,7 +487,7 @@
         btn.classList.remove('saving');
       }
     }
- 
+
     if (section === 'strengths') {
       const tags = document.getElementById('r-strengths');
       const addInput = document.getElementById('r-strengths-add');
@@ -505,7 +514,7 @@
         btn.classList.remove('saving');
       }
     }
- 
+
     if (section === 'skills') {
       const grid = document.getElementById('r-skills');
       if (!isEditing) {
@@ -533,7 +542,7 @@
         btn.classList.remove('saving');
       }
     }
- 
+
     if (section === 'experience') {
       const expDiv = document.getElementById('r-experience');
       if (!isEditing) {
@@ -560,7 +569,7 @@
         btn.classList.remove('saving');
       }
     }
- 
+
     if (section === 'education') {
       const eduDiv = document.getElementById('r-education');
       if (!isEditing) {
@@ -588,10 +597,10 @@
         btn.classList.remove('saving');
       }
     }
- 
+
     editStates[section] = !isEditing;
   }
- 
+
   function addStrength(e) {
     if (e.key !== 'Enter') return;
     const val = e.target.value.trim();
@@ -600,7 +609,7 @@
     renderStrengths(editStates['strengths']);
     e.target.value = '';
   }
- 
+
   function renderStrengths(editMode) {
     const tags = document.getElementById('r-strengths');
     tags.innerHTML = (resultData.strengths || []).map(s =>
@@ -618,28 +627,28 @@
       });
     }
   }
- 
+
   // ── RENDER RESULT ────────────────────────────────────────────────────
   function renderResult(data) {
     resultData = JSON.parse(JSON.stringify(data));
     editStates = {};
- 
+
     document.getElementById('r-name').textContent = data.name || '—';
     document.getElementById('r-title').textContent = data.title || '—';
     document.getElementById('r-ats').textContent = (data.ats_score || '—') + '/100';
     const contacts = [data.email, data.location, data.linkedin].filter(Boolean);
     document.getElementById('r-contacts').innerHTML = contacts.map(c => `<span class="resume-contact">${c}</span>`).join('');
- 
+
     document.getElementById('r-profile').textContent = data.profile || '';
     document.getElementById('r-profile-edit').style.display = 'none';
     document.getElementById('r-profile').style.display = 'block';
- 
+
     renderStrengths(false);
- 
+
     document.getElementById('r-skills').innerHTML = (data.skills || []).map(s =>
       `<div class="skill-cat-label">${s.category}</div><div class="skill-cat-value">${s.items}</div>`
     ).join('');
- 
+
     document.getElementById('r-experience').innerHTML = (data.experience || []).map(e => `
       <div class="exp-entry">
         <div class="exp-header">
@@ -648,19 +657,19 @@
         </div>
         <ul class="exp-bullets">${(e.bullets || []).map(b => `<li>${b}</li>`).join('')}</ul>
       </div>`).join('');
- 
+
     document.getElementById('r-education').innerHTML = (data.education || []).map(e => `
       <div class="edu-entry">
         <div><div class="edu-degree">${e.degree}</div><div class="edu-school">${e.school}${e.city ? ' · ' + e.city : ''}</div></div>
         <div class="edu-date">${e.year}</div>
       </div>`).join('');
- 
+
     renderCustomSections(getCustomSections());
- 
+
     document.getElementById('result-section').style.display = 'block';
     document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
- 
+
   // ── LOADING MESSAGES ─────────────────────────────────────────────────
   function startLoadingMessages(elementId) {
     const el = document.getElementById(elementId);
@@ -672,12 +681,12 @@
       el.textContent = loadingMessages[i];
     }, 2000);
   }
- 
+
   function stopLoadingMessages(intervalId, elementId) {
     clearInterval(intervalId);
     document.getElementById(elementId).style.display = 'none';
   }
- 
+
   // ── API CALL ─────────────────────────────────────────────────────────
   async function callBackend(prompt, btnId, errorId, loadingId) {
     const btn = document.getElementById(btnId);
@@ -686,9 +695,9 @@
     btn.disabled = true;
     btn.classList.add('loading');
     document.getElementById('result-section').style.display = 'none';
- 
+
     const loadingInterval = startLoadingMessages(loadingId);
- 
+
     try {
       const response = await fetch('/api/tailor', {
         method: 'POST',
@@ -707,43 +716,112 @@
       btn.classList.remove('loading');
     }
   }
- 
+
   async function buildResume() {
     const name = document.getElementById('b-name').value.trim();
     const title = document.getElementById('b-title').value.trim();
     if (!name || !title) { showError('build-error', 'Please fill in at least your name and target role.'); return; }
-    document.getElementById('build-btn').querySelector('.btn-text').textContent = 'Building your resume';
+
     const expData = getExpData();
-    const prompt = `You are an expert resume writer. Build a polished, structured resume from the following information.
- 
-PERSONAL INFO:
-Name: ${name}
-Title: ${title}
-Email: ${document.getElementById('b-email').value}
-Location: ${document.getElementById('b-location').value}
-LinkedIn: ${document.getElementById('b-linkedin').value}
- 
-WORK EXPERIENCE:
-${expData.map(e => `${e.role} at ${e.company}${e.city ? ', ' + e.city : ''} (${e.start} - ${e.end}): ${e.desc}`).join('\n')}
- 
-EDUCATION:
-${document.getElementById('b-degree').value} from ${document.getElementById('b-school').value}${document.getElementById('b-edu-city').value ? ', ' + document.getElementById('b-edu-city').value : ''}, ${document.getElementById('b-gradyear').value}, ${document.getElementById('b-field').value}
- 
-SKILLS: ${skills.join(', ')}
- 
-TARGET JOB DESCRIPTION (tailor toward this if provided):
-${document.getElementById('b-jobdesc').value || 'Not provided'}
- 
-ADDITIONAL SECTIONS:
-${getCustomSections().map(s => `${s.name}: ${s.items.join(', ')}`).join('\n') || 'None'}
- 
-Return ONLY raw JSON (no markdown, no backticks):
-{"name":"full name","title":"job title","email":"email","location":"location","linkedin":"linkedin url","ats_score":85,"profile":"2-3 sentence professional summary","strengths":["strength1","strength2","strength3","strength4","strength5"],"skills":[{"category":"Tools","items":"comma separated list"},{"category":"Methods","items":"comma separated list"},{"category":"Domains","items":"comma separated list"}],"experience":[{"role":"Job title","company":"Company","dates":"Start - End","bullets":["achievement 1","achievement 2","achievement 3"]}],"education":[{"degree":"Degree","school":"School","year":"Year"}]}`;
-    const result = await callBackend(prompt, 'build-btn', 'build-error', 'build-loading');
-    document.getElementById('build-btn').querySelector('.btn-text').textContent = 'Build my resume';
-    if (result) renderResult(result);
+    const eduCity = document.getElementById('b-edu-city').value;
+
+    // Build resume directly from form data — no AI
+    const data = {
+      name,
+      title,
+      email: document.getElementById('b-email').value,
+      location: document.getElementById('b-location').value,
+      linkedin: document.getElementById('b-linkedin').value,
+      ats_score: null,
+      profile: `${name} is a ${title}.${document.getElementById('b-location').value ? ' Based in ' + document.getElementById('b-location').value + '.' : ''}`,
+      strengths: skills.slice(0, 5),
+      skills: skills.length > 0 ? [{ category: 'Skills', items: skills.join(', ') }] : [],
+      experience: expData.map(e => ({
+        role: e.role,
+        company: e.company,
+        city: e.city,
+        dates: `${e.start}${e.end ? ' – ' + e.end : ''}`,
+        bullets: e.desc ? e.desc.split('\n').filter(Boolean) : [e.desc]
+      })),
+      education: [{
+        degree: `${document.getElementById('b-degree').value}${document.getElementById('b-field').value ? ' — ' + document.getElementById('b-field').value : ''}`,
+        school: document.getElementById('b-school').value,
+        city: eduCity,
+        year: document.getElementById('b-gradyear').value
+      }]
+    };
+
+    // Store raw form data for polish feature
+    window._rawBuildData = {
+      name, title,
+      email: document.getElementById('b-email').value,
+      location: document.getElementById('b-location').value,
+      linkedin: document.getElementById('b-linkedin').value,
+      expData,
+      degree: document.getElementById('b-degree').value,
+      school: document.getElementById('b-school').value,
+      eduCity,
+      gradyear: document.getElementById('b-gradyear').value,
+      field: document.getElementById('b-field').value,
+      skills: skills.join(', '),
+      jobdesc: document.getElementById('b-jobdesc').value,
+      customSections: getCustomSections()
+    };
+
+    renderResult(data);
+
+    // Show polish button
+    document.getElementById('polish-btn-wrap').style.display = 'block';
+    // Hide ATS badge since we didn't run AI yet
+    document.querySelector('.ats-badge').style.display = 'none';
   }
- 
+
+  async function polishWithAI() {
+    const d = window._rawBuildData;
+    if (!d) return;
+    document.getElementById('polish-btn').disabled = true;
+    document.getElementById('polish-btn').textContent = 'Polishing...';
+    document.getElementById('polish-loading').style.display = 'block';
+
+    const prompt = `You are an expert resume writer. Polish and improve the following resume information. Keep all facts truthful — only improve the wording, make bullet points more impactful, and write a strong professional summary.
+
+PERSONAL INFO:
+Name: ${d.name}
+Title: ${d.title}
+Email: ${d.email}
+Location: ${d.location}
+LinkedIn: ${d.linkedin}
+
+WORK EXPERIENCE:
+${d.expData.map(e => `${e.role} at ${e.company}${e.city ? ', ' + e.city : ''} (${e.start} - ${e.end}): ${e.desc}`).join('\n')}
+
+EDUCATION:
+${d.degree} from ${d.school}${d.eduCity ? ', ' + d.eduCity : ''}, ${d.gradyear}, ${d.field}
+
+SKILLS: ${d.skills}
+
+TARGET JOB DESCRIPTION (tailor toward this if provided):
+${d.jobdesc || 'Not provided'}
+
+ADDITIONAL SECTIONS:
+${d.customSections.map(s => `${s.name}: ${s.items.join(', ')}`).join('\n') || 'None'}
+
+Return ONLY raw JSON (no markdown, no backticks):
+{"name":"full name","title":"job title","email":"email","location":"location","linkedin":"linkedin url","ats_score":85,"profile":"2-3 sentence professional summary","strengths":["strength1","strength2","strength3","strength4","strength5"],"skills":[{"category":"Tools","items":"comma separated list"},{"category":"Methods","items":"comma separated list"},{"category":"Domains","items":"comma separated list"}],"experience":[{"role":"Job title","company":"Company","city":"city if provided","dates":"Start - End","bullets":["polished achievement 1","polished achievement 2","polished achievement 3"]}],"education":[{"degree":"Degree","school":"School","city":"city if provided","year":"Year"}]}`;
+
+    const result = await callBackend(prompt, 'polish-btn', 'build-error', 'build-loading');
+    document.getElementById('polish-loading').style.display = 'none';
+    document.getElementById('polish-btn').textContent = '✦ Polish with AI';
+    document.getElementById('polish-btn').disabled = false;
+
+    if (result) {
+      renderResult(result);
+      document.getElementById('polish-btn-wrap').style.display = 'block';
+      document.querySelector('.ats-badge').style.display = 'inline-flex';
+      document.getElementById('polish-btn').textContent = '↺ Re-polish with AI';
+    }
+  }
+
   async function tailorResume() {
     const resume = document.getElementById('t-resume').value.trim();
     const job = document.getElementById('t-job').value.trim();
@@ -751,28 +829,28 @@ Return ONLY raw JSON (no markdown, no backticks):
     if (!job) { showError('tailor-error', 'Please paste the job description.'); return; }
     document.getElementById('tailor-btn').querySelector('.btn-text').textContent = 'Tailoring your resume';
     const prompt = `You are an expert resume writer. Tailor and restructure the resume below to match the job description. Keep all information truthful.
- 
+
 RESUME:
 ${resume.slice(0, 3000)}
- 
+
 JOB DESCRIPTION:
 ${job.slice(0, 2000)}
- 
+
 Return ONLY raw JSON (no markdown, no backticks):
 {"name":"full name from resume","title":"tailored job title","email":"email if found","location":"location if found","linkedin":"linkedin if found","ats_score":87,"profile":"2-3 sentence professional summary tailored to this specific job","strengths":["strength1","strength2","strength3","strength4","strength5"],"skills":[{"category":"Tools","items":"comma separated list"},{"category":"Methods","items":"comma separated list"},{"category":"Domains","items":"comma separated list"}],"experience":[{"role":"Job title","company":"Company","dates":"Start - End","bullets":["tailored achievement 1","tailored achievement 2","tailored achievement 3"]}],"education":[{"degree":"Degree","school":"School","year":"Year"}]}`;
     const result = await callBackend(prompt, 'tailor-btn', 'tailor-error', 'tailor-loading');
     document.getElementById('tailor-btn').querySelector('.btn-text').textContent = 'Tailor my resume';
     if (result) renderResult(result);
   }
- 
+
   function resetResult() {
     document.getElementById('result-section').style.display = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
- 
+
   // ── CUSTOM SECTIONS ──────────────────────────────────────────────────
   let customSectionCount = 0;
- 
+
   function addCustomSection(name) {
     const list = document.getElementById('custom-sections-list');
     const id = customSectionCount++;
@@ -794,7 +872,7 @@ Return ONLY raw JSON (no markdown, no backticks):
     `;
     list.appendChild(div);
   }
- 
+
   function addCustomEntry(sectionId) {
     const list = document.getElementById(`custom-entries-${sectionId}`);
     const div = document.createElement('div');
@@ -805,11 +883,11 @@ Return ONLY raw JSON (no markdown, no backticks):
     `;
     list.appendChild(div);
   }
- 
+
   function removeCustomSection(id) {
     document.getElementById(`custom-section-${id}`)?.remove();
   }
- 
+
   function getCustomSections() {
     return Array.from(document.querySelectorAll('.custom-section-item')).map(section => ({
       name: section.querySelector('.custom-section-name')?.value || 'Custom Section',
@@ -817,7 +895,7 @@ Return ONLY raw JSON (no markdown, no backticks):
         .map(i => i.value.trim()).filter(Boolean)
     })).filter(s => s.items.length > 0);
   }
- 
+
   function renderCustomSections(sections) {
     const container = document.getElementById('r-custom-sections');
     if (!sections || sections.length === 0) { container.innerHTML = ''; return; }
@@ -833,7 +911,7 @@ Return ONLY raw JSON (no markdown, no backticks):
       </div>
     `).join('');
   }
- 
+
   function toggleEditCustom(idx) {
     const ul = document.getElementById(`r-custom-${idx}`);
     const btn = ul?.closest('div')?.querySelector('.edit-btn');
