@@ -46,6 +46,10 @@
     textarea { resize: vertical; }
     .add-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--accent); font-weight: 500; background: var(--accent-light); border: none; border-radius: 99px; padding: 5px 12px; cursor: pointer; margin-top: 10px; }
     .add-btn:hover { background: #d4eade; }
+    .input-tabs { display: flex; border-bottom: 1px solid var(--paper3); }
+    .tab-btn { padding: 7px 16px; font-size: 13px; font-weight: 500; color: var(--ink3); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.15s; margin-bottom: -1px; }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn:hover { color: var(--ink); }
     .current-work-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; color: var(--ink3); background: var(--paper); border: 1.5px solid var(--paper3); border-radius: 99px; padding: 4px 10px; cursor: pointer; transition: all 0.15s; margin-top: 6px; }
     .current-work-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
     .current-work-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
@@ -221,10 +225,17 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><div class="card-title-icon">⚡</div> Skills</div>
-      <label>Add skills (press Enter)</label>
+      <div class="card-title"><div class="card-title-icon">⚙️</div> Technical skills</div>
+      <label style="margin-bottom:6px;display:block;">Tools, software, languages <span style="font-size:11px;font-weight:400;color:var(--ink3);">— press Enter to add</span></label>
       <input type="text" id="skill-input" placeholder="e.g. SQL, Figma, Agile..." onkeydown="addSkill(event)">
-      <div class="skill-tags" id="skill-tags"></div>
+      <div class="skill-tags" id="skill-tags" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="card-title-icon">✦</div> Strengths</div>
+      <label style="margin-bottom:6px;display:block;">Soft skills & personal qualities <span style="font-size:11px;font-weight:400;color:var(--ink3);">— press Enter to add</span></label>
+      <input type="text" id="strength-input" placeholder="e.g. Leadership, Communication..." onkeydown="addStrengthInput(event)">
+      <div class="skill-tags" id="strength-tags" style="margin-top:10px;"></div>
     </div>
 
     <div class="card">
@@ -367,6 +378,7 @@
   let expCount = 1;
   let resultData = {};
   let editStates = {};
+  let strengths = [];
 
   const loadingMessages = [
     'Analyzing your resume...',
@@ -400,6 +412,26 @@
   function renderSkillTags() {
     document.getElementById('skill-tags').innerHTML = skills.map(s =>
       `<div class="skill-tag">${s}<button onclick="removeSkillTag('${s}')" aria-label="Remove ${s}">×</button></div>`
+    ).join('');
+  }
+
+  function addStrengthInput(e) {
+    if (e.key !== 'Enter') return;
+    const val = e.target.value.trim();
+    if (!val || strengths.includes(val)) { e.target.value = ''; return; }
+    strengths.push(val);
+    renderStrengthInputTags();
+    e.target.value = '';
+  }
+
+  function removeStrengthInputTag(s) {
+    strengths = strengths.filter(x => x !== s);
+    renderStrengthInputTags();
+  }
+
+  function renderStrengthInputTags() {
+    document.getElementById('strength-tags').innerHTML = strengths.map(s =>
+      `<div class="skill-tag">${s}<button onclick="removeStrengthInputTag('${s}')" aria-label="Remove ${s}">×</button></div>`
     ).join('');
   }
 
@@ -734,8 +766,8 @@
       linkedin: document.getElementById('b-linkedin').value,
       ats_score: null,
       profile: `${name} is a ${title}.${document.getElementById('b-location').value ? ' Based in ' + document.getElementById('b-location').value + '.' : ''}`,
-      strengths: skills.slice(0, 5),
-      skills: skills.length > 0 ? [{ category: 'Skills', items: skills.join(', ') }] : [],
+      strengths: strengths.length > 0 ? strengths : skills.slice(0, 5),
+      skills: skills.length > 0 ? [{ category: 'Technical Skills', items: skills.join(', ') }] : [],
       experience: expData.map(e => ({
         role: e.role,
         company: e.company,
@@ -764,6 +796,7 @@
       gradyear: document.getElementById('b-gradyear').value,
       field: document.getElementById('b-field').value,
       skills: skills.join(', '),
+      strengths: strengths.join(', '),
       jobdesc: document.getElementById('b-jobdesc').value,
       customSections: getCustomSections()
     };
@@ -799,6 +832,7 @@ EDUCATION:
 ${d.degree} from ${d.school}${d.eduCity ? ', ' + d.eduCity : ''}, ${d.gradyear}, ${d.field}
 
 SKILLS: ${d.skills}
+STRENGTHS: ${d.strengths}
 
 TARGET JOB DESCRIPTION (tailor toward this if provided):
 ${d.jobdesc || 'Not provided'}
