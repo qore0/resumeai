@@ -49,7 +49,7 @@
     #page-build.active { display: flex; gap: 0; min-height: calc(100vh - 110px); }
     .builder-form { width: 50%; flex-shrink: 0; padding: 24px; overflow-y: auto; border-right: 1px solid var(--paper3); background: var(--paper); max-height: calc(100vh - 110px); }
     .builder-preview { width: 50%; padding: 24px; overflow-y: auto; background: var(--paper2); position: sticky; top: 110px; height: calc(100vh - 110px); display: flex; flex-direction: column; }
-    .preview-inner { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; width: 100%; max-width: 560px; margin: 0 auto; flex-shrink: 0; }
+    .preview-inner { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; width: 100%; flex-shrink: 0; }
     .preview-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
     .preview-label::after { content: 'Live preview'; font-size: 10px; background: var(--accent-light); color: var(--accent); padding: 2px 8px; border-radius: 99px; font-weight: 500; letter-spacing: 0; text-transform: none; }
 
@@ -428,13 +428,19 @@
         <div class="icon">🎓</div> Education <div class="chevron">▼</div>
       </div>
       <div class="form-section-body open">
-        <div class="form-grid">
-          <div><label>Degree</label><input type="text" id="b-degree" placeholder="Bachelor of Commerce" oninput="updatePreview()"></div>
-          <div><label>School</label><input type="text" id="b-school" placeholder="University of Toronto" oninput="updatePreview()"></div>
-          <div><label>City</label><input type="text" id="b-edu-city" placeholder="Toronto, ON" oninput="updatePreview()"></div>
-          <div><label>Graduation year</label><input type="text" id="b-gradyear" placeholder="2019" oninput="updatePreview()"></div>
-          <div class="form-full"><label>Field of study</label><input type="text" id="b-field" placeholder="Management & Strategy" oninput="updatePreview()"></div>
+        <div id="edu-list">
+          <div class="exp-item" id="edu-0">
+            <div class="exp-item-header"><span class="exp-item-title">Education 1</span><button class="remove-btn" onclick="removeEdu(0)">✕</button></div>
+            <div class="form-grid">
+              <div><label>Degree</label><input type="text" placeholder="Bachelor of Commerce" class="edu-degree" oninput="updatePreview()"></div>
+              <div><label>School</label><input type="text" placeholder="University of Toronto" class="edu-school" oninput="updatePreview()"></div>
+              <div><label>City</label><input type="text" placeholder="Toronto, ON" class="edu-city" oninput="updatePreview()"></div>
+              <div><label>Graduation year</label><input type="text" placeholder="2019" class="edu-year" oninput="updatePreview()"></div>
+              <div class="form-full"><label>Field of study</label><input type="text" placeholder="Management & Strategy" class="edu-field" oninput="updatePreview()"></div>
+            </div>
+          </div>
         </div>
+        <button class="add-btn" onclick="addEdu()">+ Add education</button>
       </div>
     </div>
 
@@ -568,6 +574,7 @@
   let skills = [];
   let strengths = [];
   let expCount = 1;
+  let eduCount = 1;
   let customSectionCount = 0;
   let selectedTemplate = null;
   let currentMode = 'build';
@@ -707,6 +714,34 @@
     updatePreview();
   }
 
+  // ── EDUCATION ─────────────────────────────────────────────────────────
+  function addEdu() {
+    const list = document.getElementById('edu-list');
+    const div = document.createElement('div');
+    div.className='exp-item'; div.id=`edu-${eduCount}`;
+    div.innerHTML=`
+      <div class="exp-item-header"><span class="exp-item-title">Education ${eduCount+1}</span><button class="remove-btn" onclick="removeEdu(${eduCount})">✕</button></div>
+      <div class="form-grid">
+        <div><label>Degree</label><input type="text" placeholder="Bachelor of Commerce" class="edu-degree" oninput="updatePreview()"></div>
+        <div><label>School</label><input type="text" placeholder="University name" class="edu-school" oninput="updatePreview()"></div>
+        <div><label>City</label><input type="text" placeholder="Toronto, ON" class="edu-city" oninput="updatePreview()"></div>
+        <div><label>Graduation year</label><input type="text" placeholder="2019" class="edu-year" oninput="updatePreview()"></div>
+        <div class="form-full"><label>Field of study</label><input type="text" placeholder="Management & Strategy" class="edu-field" oninput="updatePreview()"></div>
+      </div>`;
+    list.appendChild(div); eduCount++;
+  }
+
+  function removeEdu(id) { document.getElementById(`edu-${id}`)?.remove(); updatePreview(); }
+
+  function getEduData() {
+    return Array.from(document.querySelectorAll('#edu-list .exp-item')).map(item => ({
+      degree: `${item.querySelector('.edu-degree')?.value||''}${item.querySelector('.edu-field')?.value?' — '+item.querySelector('.edu-field').value:''}`,
+      school: item.querySelector('.edu-school')?.value||'',
+      city: item.querySelector('.edu-city')?.value||'',
+      year: item.querySelector('.edu-year')?.value||''
+    })).filter(e => e.degree || e.school);
+  }
+
   // ── CUSTOM SECTIONS ──────────────────────────────────────────────────
   function addCustomSection(name) {
     const list = document.getElementById('custom-sections-list');
@@ -757,12 +792,7 @@
         dates: `${e.start}${e.end?' – '+e.end:''}`,
         bullets: e.desc ? e.desc.split('\n').filter(Boolean) : []
       })),
-      education: [{
-        degree: `${document.getElementById('b-degree').value||''}${document.getElementById('b-field').value?' — '+document.getElementById('b-field').value:''}`,
-        school: document.getElementById('b-school').value,
-        city: document.getElementById('b-edu-city').value,
-        year: document.getElementById('b-gradyear').value
-      }],
+      education: getEduData(),
       customSections: getCustomSections()
     };
     document.getElementById('live-preview').innerHTML = buildResumeHTML(data, selectedTemplate, false);
@@ -918,12 +948,7 @@
         dates:`${e.start}${e.end?' – '+e.end:''}`,
         bullets: e.desc ? e.desc.split('\n').filter(Boolean) : []
       })),
-      education:[{
-        degree:`${document.getElementById('b-degree').value}${document.getElementById('b-field').value?' — '+document.getElementById('b-field').value:''}`,
-        school:document.getElementById('b-school').value,
-        city:eduCity,
-        year:document.getElementById('b-gradyear').value
-      }],
+      education: getEduData(),
       customSections: getCustomSections()
     };
 
@@ -932,11 +957,7 @@
       email:document.getElementById('b-email').value,
       location:document.getElementById('b-location').value,
       linkedin:document.getElementById('b-linkedin').value,
-      expData, eduCity,
-      degree:document.getElementById('b-degree').value,
-      school:document.getElementById('b-school').value,
-      gradyear:document.getElementById('b-gradyear').value,
-      field:document.getElementById('b-field').value,
+      expData, eduData: getEduData(),
       skills:skills.join(', '),
       strengths:strengths.join(', '),
       jobdesc:document.getElementById('b-jobdesc').value,
@@ -967,7 +988,7 @@ Name: ${d.name}, Title: ${d.title}, Email: ${d.email}, Location: ${d.location}, 
 WORK EXPERIENCE:
 ${d.expData.map(e=>`${e.role} at ${e.company}${e.city?', '+e.city:''} (${e.start} - ${e.end}): ${e.desc}`).join('\n')}
 
-EDUCATION: ${d.degree} from ${d.school}${d.eduCity?', '+d.eduCity:''}, ${d.gradyear}, ${d.field}
+EDUCATION: ${d.eduData ? d.eduData.map(e=>`${e.degree} from ${e.school}${e.city?', '+e.city:''} ${e.year}`).join(' | ') : ''}
 TECHNICAL SKILLS: ${d.skills}
 STRENGTHS: ${d.strengths}
 TARGET JOB: ${d.jobdesc||'Not provided'}
