@@ -397,7 +397,8 @@
     .tpl-sales .r-skills-val { font-size: 11px; color: #555; }
 
     /* shared */
-    .r-profile-text { font-size: 11.5px; line-height: 1.6; color: inherit; margin-bottom: 4px; opacity: 0.9; }
+    .r-profile-text { font-size: 11.5px; line-height: 1.4; color: inherit; margin-bottom: 4px; opacity: 0.9; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; }
+    #live-preview .rb, #live-preview .rh { word-wrap: break-word; overflow-wrap: break-word; overflow: hidden; }
     .r-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .r-tag { font-size: 11px; padding: 3px 9px; border-radius: 99px; background: rgba(0,0,0,0.06); color: inherit; }
     .r-exp { margin-bottom: 9px; }
@@ -580,9 +581,9 @@
           <button class="sfmt-btn" onclick="adjustSectionFmt('profile','size',1)">+</button>
           <div class="sfmt-divider"></div>
           <span class="sfmt-label">Space</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('profile','space',-1)">−</button>
-          <span class="sfmt-val" id="sfmt-profile-space">0</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('profile','space',1)">+</button>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('profile','spacing',-1)">−</button>
+          <span class="sfmt-val" id="sfmt-profile-spacing">0</span>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('profile','spacing',1)">+</button>
         </div>
         <textarea id="b-profile" rows="4" placeholder="e.g. Experienced mechanical engineer with 5+ years in automotive manufacturing, specialising in process validation and root cause analysis..." oninput="updatePreview()"></textarea>
         <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;">
@@ -717,9 +718,9 @@
           <button class="sfmt-btn" onclick="adjustSectionFmt('skills','size',1)">+</button>
           <div class="sfmt-divider"></div>
           <span class="sfmt-label">Space</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('skills','space',-1)">−</button>
-          <span class="sfmt-val" id="sfmt-skills-space">0</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('skills','space',1)">+</button>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('skills','spacing',-1)">−</button>
+          <span class="sfmt-val" id="sfmt-skills-spacing">0</span>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('skills','spacing',1)">+</button>
         </div>
         <label style="margin-bottom:6px;">Tools, software, languages — press Enter to add</label>
         <input type="text" id="skill-input" placeholder="e.g. SQL, Figma, Agile..." onkeydown="addSkill(event)">
@@ -762,9 +763,9 @@
           <button class="sfmt-btn" onclick="adjustSectionFmt('strengths','size',1)">+</button>
           <div class="sfmt-divider"></div>
           <span class="sfmt-label">Space</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('strengths','space',-1)">−</button>
-          <span class="sfmt-val" id="sfmt-strengths-space">0</span>
-          <button class="sfmt-btn" onclick="adjustSectionFmt('strengths','space',1)">+</button>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('strengths','spacing',-1)">−</button>
+          <span class="sfmt-val" id="sfmt-strengths-spacing">0</span>
+          <button class="sfmt-btn" onclick="adjustSectionFmt('strengths','spacing',1)">+</button>
         </div>
         <label style="margin-bottom:6px;">Soft skills & personal qualities — press Enter to add</label>
         <input type="text" id="strength-input" placeholder="e.g. Leadership, Communication..." onkeydown="addStrengthInput(event)">
@@ -1185,7 +1186,7 @@
     eduDegree:  { bold: true,  underline: false, size: 0 },
     eduSchool:  { bold: false, italic: false, color: '#666', size: 0 },
     eduYear:    { bold: false, italic: false, size: 0 },
-    profile:    { bold: false, italic: false, size: 0 },
+    profile:    { bold: false, italic: false, size: 0, spacing: 0 },
     strengths:  { bold: false, italic: false, size: 0, spacing: 0 },
     skills:     { bold: false, size: 0, spacing: 0 },
     sectionLabel: { underline: false },
@@ -1222,7 +1223,7 @@
       #live-preview .r-exp-meta { font-weight: ${ff.expCompany.bold ? '700' : '400'} !important; font-style: ${ff.expCompany.italic ? 'italic' : 'normal'} !important; color: ${ff.expCompany.color} !important; font-size: ${BASE.expCompany + ff.expCompany.size}px !important; opacity: 1 !important; }
       #live-preview .r-exp-dates { font-weight: ${ff.expDates.bold ? '700' : '400'} !important; font-style: ${ff.expDates.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.expDates + ff.expDates.size}px !important; opacity: 1 !important; }
       #live-preview .r-exp-bullets li { font-size: ${BASE.expBullets + ff.expBullets.size}px !important; line-height: ${1.5 + ff.expBullets.spacing * 0.1} !important; }
-      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.profile + ff.profile.size}px !important; opacity: 1 !important; }
+      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.profile + ff.profile.size}px !important; line-height: ${1.4 + (ff.profile.spacing||0) * 0.15} !important; opacity: 1 !important; }
       #live-preview .r-str-tag { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
       #live-preview .r-str-item { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; line-height: ${1.5 + (ff.strengths.spacing||0) * 0.15} !important; }
       #live-preview .r-str-inline { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
