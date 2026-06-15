@@ -612,10 +612,10 @@
           <button class="sfmt-btn" onclick="toggleFieldFmt('exp-role','bold')" id="ffmt-exp-role-bold" title="Bold role"><b>B</b></button>
           <button class="sfmt-btn" onclick="toggleFieldFmt('exp-role','underline')" id="ffmt-exp-role-underline" title="Underline role"><u>U</u></button>
           <select id="ffmt-exp-role-size" onchange="ff.expRole.size=parseInt(this.value);applyAllFormatting()" style="font-size:10px;border:1.5px solid var(--paper3);border-radius:4px;padding:1px 4px;background:#fff;outline:none;cursor:pointer;">
-            <option value="11">S</option>
-            <option value="12">M</option>
-            <option value="13" selected>L</option>
-            <option value="14">XL</option>
+            <option value="-2">S</option>
+            <option value="0" selected>M</option>
+            <option value="2">L</option>
+            <option value="4">XL</option>
           </select>
           <div class="sfmt-divider"></div>
           <span class="sfmt-label">Company</span>
@@ -665,10 +665,10 @@
           <button class="sfmt-btn" onclick="toggleFieldFmt('edu-degree','bold')" id="ffmt-edu-degree-bold" title="Bold degree"><b>B</b></button>
           <button class="sfmt-btn" onclick="toggleFieldFmt('edu-degree','underline')" id="ffmt-edu-degree-underline" title="Underline degree"><u>U</u></button>
           <select id="ffmt-edu-degree-size" onchange="ff.eduDegree.size=parseInt(this.value);applyAllFormatting()" style="font-size:10px;border:1.5px solid var(--paper3);border-radius:4px;padding:1px 4px;background:#fff;outline:none;cursor:pointer;">
-            <option value="11">S</option>
-            <option value="12">M</option>
-            <option value="13" selected>L</option>
-            <option value="14">XL</option>
+            <option value="-2">S</option>
+            <option value="0" selected>M</option>
+            <option value="2">L</option>
+            <option value="4">XL</option>
           </select>
           <div class="sfmt-divider"></div>
           <span class="sfmt-label">School</span>
@@ -1178,17 +1178,25 @@
     name:       { bold: true,  size: 0 },
     title:      { italic: false, size: 0 },
     contact:    { size: 0, color: '#888' },
-    expRole:    { bold: true,  underline: false, size: 13 },
-    expCompany: { bold: false, italic: false, color: '#666', size: 11 },
-    expDates:   { bold: false, italic: false, size: 11 },
-    expBullets: { size: 11, spacing: 0 },
-    eduDegree:  { bold: true,  underline: false, size: 13 },
-    eduSchool:  { bold: false, italic: false, color: '#666', size: 11 },
-    eduYear:    { bold: false, italic: false, size: 11 },
-    profile:    { bold: false, italic: false, size: 12 },
-    strengths:  { bold: false, italic: false, size: 11 },
-    skills:     { bold: false, size: 11 },
+    expRole:    { bold: true,  underline: false, size: 0 },
+    expCompany: { bold: false, italic: false, color: '#666', size: 0 },
+    expDates:   { bold: false, italic: false, size: 0 },
+    expBullets: { size: 0, spacing: 0 },
+    eduDegree:  { bold: true,  underline: false, size: 0 },
+    eduSchool:  { bold: false, italic: false, color: '#666', size: 0 },
+    eduYear:    { bold: false, italic: false, size: 0 },
+    profile:    { bold: false, italic: false, size: 0 },
+    strengths:  { bold: false, italic: false, size: 0, spacing: 0 },
+    skills:     { bold: false, size: 0, spacing: 0 },
     sectionLabel: { underline: false },
+  };
+
+  // Base sizes — formatting adds offsets to these
+  const BASE = {
+    name: 22, title: 12, contact: 11,
+    expRole: 13, expCompany: 11, expDates: 11, expBullets: 11,
+    eduDegree: 13, eduSchool: 11, eduYear: 11,
+    profile: 12, strengths: 11, skills: 11,
   };
 
   const colorSchemes = {
@@ -1210,21 +1218,21 @@
       #live-preview .rh-title { font-style: ${ff.title.italic || fmtItalic ? 'italic' : 'normal'} !important; font-size: ${12 + ff.title.size}px !important; }
       #live-preview .rh-contacts, #live-preview .rh-contacts span { font-size: ${11 + ff.contact.size}px !important; }
       #live-preview .rs-label { text-decoration: ${ff.sectionLabel.underline || fmtUnderline ? 'underline' : 'none'} !important; }
-      #live-preview .r-exp-role { font-weight: ${ff.expRole.bold ? '700' : '400'} !important; font-size: ${ff.expRole.size}px !important; text-decoration: ${ff.expRole.underline ? 'underline' : 'none'} !important; }
-      #live-preview .r-exp-meta { font-weight: ${ff.expCompany.bold ? '700' : '400'} !important; font-style: ${ff.expCompany.italic ? 'italic' : 'normal'} !important; color: ${ff.expCompany.color} !important; font-size: ${ff.expCompany.size}px !important; opacity: 1 !important; }
-      #live-preview .r-exp-dates { font-weight: ${ff.expDates.bold ? '700' : '400'} !important; font-style: ${ff.expDates.italic ? 'italic' : 'normal'} !important; font-size: ${ff.expDates.size}px !important; opacity: 1 !important; }
-      #live-preview .r-exp-bullets li { font-size: ${ff.expBullets.size}px !important; line-height: ${1.5 + ff.expBullets.spacing * 0.1} !important; }
-      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${ff.profile.size}px !important; opacity: 1 !important; }
-      #live-preview .r-str-tag { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${ff.strengths.size}px !important; }
-      #live-preview .r-str-item { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${ff.strengths.size}px !important; }
-      #live-preview .r-str-inline { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${ff.strengths.size}px !important; }
-      #live-preview .r-skl-tag { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${ff.skills.size}px !important; }
-      #live-preview .r-skl-item { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${ff.skills.size}px !important; }
-      #live-preview .r-skl-cat { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${Math.max(9, ff.skills.size - 1)}px !important; opacity: 1 !important; }
-      #live-preview .r-skl-val { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${ff.skills.size}px !important; opacity: 1 !important; }
-      #live-preview .r-edu-degree { font-weight: ${ff.eduDegree.bold ? '700' : '400'} !important; font-size: ${ff.eduDegree.size}px !important; text-decoration: ${ff.eduDegree.underline ? 'underline' : 'none'} !important; }
-      #live-preview .r-edu-school { font-weight: ${ff.eduSchool.bold ? '700' : '400'} !important; font-style: ${ff.eduSchool.italic ? 'italic' : 'normal'} !important; color: ${ff.eduSchool.color} !important; font-size: ${ff.eduSchool.size}px !important; opacity: 1 !important; }
-      #live-preview .r-edu-year { font-weight: ${ff.eduYear.bold ? '700' : '400'} !important; font-style: ${ff.eduYear.italic ? 'italic' : 'normal'} !important; font-size: ${ff.eduYear.size}px !important; opacity: 1 !important; }
+      #live-preview .r-exp-role { font-weight: ${ff.expRole.bold ? '700' : '400'} !important; font-size: ${BASE.expRole + ff.expRole.size}px !important; text-decoration: ${ff.expRole.underline ? 'underline' : 'none'} !important; }
+      #live-preview .r-exp-meta { font-weight: ${ff.expCompany.bold ? '700' : '400'} !important; font-style: ${ff.expCompany.italic ? 'italic' : 'normal'} !important; color: ${ff.expCompany.color} !important; font-size: ${BASE.expCompany + ff.expCompany.size}px !important; opacity: 1 !important; }
+      #live-preview .r-exp-dates { font-weight: ${ff.expDates.bold ? '700' : '400'} !important; font-style: ${ff.expDates.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.expDates + ff.expDates.size}px !important; opacity: 1 !important; }
+      #live-preview .r-exp-bullets li { font-size: ${BASE.expBullets + ff.expBullets.size}px !important; line-height: ${1.5 + ff.expBullets.spacing * 0.1} !important; }
+      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.profile + ff.profile.size}px !important; opacity: 1 !important; }
+      #live-preview .r-str-tag { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
+      #live-preview .r-str-item { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; line-height: ${1.5 + (ff.strengths.spacing||0) * 0.15} !important; }
+      #live-preview .r-str-inline { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
+      #live-preview .r-skl-tag { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; }
+      #live-preview .r-skl-item { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; line-height: ${1.5 + (ff.skills.spacing||0) * 0.15} !important; }
+      #live-preview .r-skl-cat { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${Math.max(9, BASE.skills + ff.skills.size - 1)}px !important; opacity: 1 !important; }
+      #live-preview .r-skl-val { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; opacity: 1 !important; }
+      #live-preview .r-edu-degree { font-weight: ${ff.eduDegree.bold ? '700' : '400'} !important; font-size: ${BASE.eduDegree + ff.eduDegree.size}px !important; text-decoration: ${ff.eduDegree.underline ? 'underline' : 'none'} !important; }
+      #live-preview .r-edu-school { font-weight: ${ff.eduSchool.bold ? '700' : '400'} !important; font-style: ${ff.eduSchool.italic ? 'italic' : 'normal'} !important; color: ${ff.eduSchool.color} !important; font-size: ${BASE.eduSchool + ff.eduSchool.size}px !important; opacity: 1 !important; }
+      #live-preview .r-edu-year { font-weight: ${ff.eduYear.bold ? '700' : '400'} !important; font-style: ${ff.eduYear.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.eduYear + ff.eduYear.size}px !important; opacity: 1 !important; }
       #live-preview .page-break { border: none; border-top: 2px dashed #d1d5db; margin: 8px 0; height: 18px; display: flex; align-items: center; justify-content: center; position: relative; background: #f9fafb; }
       #live-preview .page-break::after { content: '— Page 2 —'; font-size: 9px; color: #9ca3af; letter-spacing: 0.1em; position: absolute; background: #f9fafb; padding: 0 8px; }
     `;
@@ -1292,8 +1300,19 @@
   function toggleFieldFmt(field, prop) { toggleFF(field === 'exp-role' ? 'expRole' : field === 'exp-company' ? 'expCompany' : field === 'exp-dates' ? 'expDates' : field === 'edu-degree' ? 'eduDegree' : field === 'edu-school' ? 'eduSchool' : field === 'edu-year' ? 'eduYear' : field, prop); }
   function toggleSectionFmt(s, p) { const k = s==='experience'?'expRole':s==='education'?'eduDegree':s==='skills'?'skills':s==='strengths'?'strengths':s==='profile'?'profile':s; toggleFF(k, p); }
   function adjustSectionFmt(s, p, d) {
-    const k = s==='experience'?'expBullets':s==='education'?'eduDegree':s==='skills'?'skills':s==='strengths'?'strengths':s==='profile'?'profile':s;
-    if (ff[k] && ff[k][p] !== undefined) { ff[k][p] = Math.max(-2, Math.min(6, ff[k][p]+d)); const el = document.getElementById(`sfmt-${s}-${p}`); if (el) el.textContent = ff[k][p]>0?'+'+ff[k][p]:ff[k][p]; }
+    const keyMap = {
+      experience: { size: 'expBullets', spacing: 'expBullets' },
+      education:  { size: 'eduDegree',  spacing: 'eduDegree'  },
+      skills:     { size: 'skills',     spacing: 'skills'     },
+      strengths:  { size: 'strengths',  spacing: 'strengths'  },
+      profile:    { size: 'profile',    spacing: 'profile'    },
+    };
+    const k = keyMap[s]?.[p] || s;
+    if (ff[k] && ff[k][p] !== undefined) {
+      ff[k][p] = Math.max(-3, Math.min(6, ff[k][p] + d));
+      const el = document.getElementById(`sfmt-${s}-${p}`);
+      if (el) el.textContent = ff[k][p] > 0 ? '+' + ff[k][p] : ff[k][p];
+    }
     applyAllFormatting();
   }
   // ── POLISH PROFILE SUMMARY ───────────────────────────────────────────
