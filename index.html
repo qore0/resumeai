@@ -1757,45 +1757,65 @@ Return ONLY raw JSON (no markdown):
 
     const name = document.getElementById('b-name')?.value || 'Resume';
     const btn = document.querySelector('[onclick="downloadPDF()"]');
-
-    // Update button state
     if (btn) { btn.textContent = 'Generating PDF...'; btn.disabled = true; }
 
     // Hide page break markers
     preview.querySelectorAll('.page-break').forEach(el => el.style.display = 'none');
 
-    // Clone the preview so we can style it without affecting the live view
-    const clone = preview.cloneNode(true);
-    clone.style.width = '794px'; // A4 width in px at 96dpi
-    clone.style.padding = '0';
-    clone.style.margin = '0';
-    clone.style.background = '#fff';
-    clone.style.fontSize = '12px';
+    // Build a self-contained HTML document for the PDF
+    // Pull in all stylesheets from the current page
+    const styles = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
+      .map(el => el.outerHTML).join('\n');
 
-    // Apply the formatting stylesheet to the clone
-    const fmtStyle = document.getElementById('preview-fmt-style');
-    if (fmtStyle) {
-      const styleClone = fmtStyle.cloneNode(true);
-      // Update selectors to target clone instead of #live-preview
-      styleClone.textContent = fmtStyle.textContent.replace(/#live-preview /g, '');
-      clone.prepend(styleClone);
-    }
+    // Get the formatting CSS
+    const fmtStyle = document.getElementById('preview-fmt-style')?.textContent || '';
+
+    // Build full document with resume HTML
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  ${styles}
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #fff; margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; }
+    ${fmtStyle.replace(/#live-preview /g, '')}
+    .page-break { display: none !important; }
+    .rh, .rb { word-wrap: break-word; overflow-wrap: break-word; }
+  </style>
+</head>
+<body>
+  ${preview.innerHTML}
+</body>
+</html>`;
+
+    // Create a hidden iframe, write the HTML into it, then pdf it
+    const iframe = document.createElement('iframe');
+    iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:794px;height:1122px;border:none;visibility:hidden;';
+    document.body.appendChild(iframe);
+
+    iframe.contentDocument.open();
+    iframe.contentDocument.write(html);
+    iframe.contentDocument.close();
+
+    // Wait for iframe to fully render
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     const options = {
-      margin:      [10, 10, 10, 10], // top, right, bottom, left in mm
+      margin:      [10, 10, 10, 10],
       filename:    `${name} Resume.pdf`,
       image:       { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false },
+      html2canvas: { scale: 2, useCORS: true, logging: false, allowTaint: true },
       jsPDF:       { unit: 'mm', format: 'letter', orientation: 'portrait' },
-      pagebreak:   { mode: ['avoid-all', 'css'] }
     };
 
     try {
-      await html2pdf().set(options).from(clone).save();
+      await html2pdf().set(options).from(iframe.contentDocument.body).save();
     } catch(err) {
       alert('PDF generation failed. Please try again.');
       console.error(err);
     } finally {
+      document.body.removeChild(iframe);
       if (btn) { btn.textContent = 'Download PDF'; btn.disabled = false; }
       preview.querySelectorAll('.page-break').forEach(el => el.style.display = '');
     }
