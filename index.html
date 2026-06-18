@@ -1271,25 +1271,25 @@
     let css = `
       #live-preview { font-size: ${12 + fmtFontSize}px; }
       #live-preview .rb { line-height: ${1.4 + fmtSpacing * 0.08}; }
-      #live-preview .rh-name { font-weight: ${fmtBold ? '900' : (ff.name.bold ? '800' : '600')} !important; font-size: ${22 + ff.name.size}px !important; }
-      #live-preview .rh-title { font-style: ${ff.title.italic || fmtItalic ? 'italic' : 'normal'} !important; font-size: ${12 + ff.title.size}px !important; }
-      #live-preview .rh-contacts, #live-preview .rh-contacts span { font-size: ${11 + ff.contact.size}px !important; }
-      #live-preview .rs-label { text-decoration: ${ff.sectionLabel.underline || fmtUnderline ? 'underline' : 'none'} !important; }
-      #live-preview .r-exp-role { font-weight: ${ff.expRole.bold ? '700' : '400'} !important; font-size: ${BASE.expRole + ff.expRole.size}px !important; text-decoration: ${ff.expRole.underline ? 'underline' : 'none'} !important; }
-      #live-preview .r-exp-meta { font-weight: ${ff.expCompany.bold ? '700' : '400'} !important; font-style: ${ff.expCompany.italic ? 'italic' : 'normal'} !important; color: ${ff.expCompany.color} !important; font-size: ${BASE.expCompany + ff.expCompany.size}px !important; opacity: 1 !important; }
-      #live-preview .r-exp-dates { font-weight: ${ff.expDates.bold ? '700' : '400'} !important; font-style: ${ff.expDates.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.expDates + ff.expDates.size}px !important; opacity: 1 !important; }
-      #live-preview .r-exp-bullets li { font-size: ${BASE.expBullets + ff.expBullets.size}px !important; line-height: ${1.5 + ff.expBullets.spacing * 0.1} !important; }
-      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.profile + ff.profile.size}px !important; line-height: ${1.4 + (ff.profile.spacing||0) * 0.15} !important; opacity: 1 !important; }
-      #live-preview .r-str-tag { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
-      #live-preview .r-str-item { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; line-height: ${1.5 + (ff.strengths.spacing||0) * 0.15} !important; }
-      #live-preview .r-str-inline { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size}px !important; }
-      #live-preview .r-skl-tag { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; }
-      #live-preview .r-skl-item { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; line-height: ${1.5 + (ff.skills.spacing||0) * 0.15} !important; }
-      #live-preview .r-skl-cat { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${Math.max(9, BASE.skills + ff.skills.size - 1)}px !important; opacity: 1 !important; }
-      #live-preview .r-skl-val { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size}px !important; opacity: 1 !important; }
-      #live-preview .r-edu-degree { font-weight: ${ff.eduDegree.bold ? '700' : '400'} !important; font-size: ${BASE.eduDegree + ff.eduDegree.size}px !important; text-decoration: ${ff.eduDegree.underline ? 'underline' : 'none'} !important; }
-      #live-preview .r-edu-school { font-weight: ${ff.eduSchool.bold ? '700' : '400'} !important; font-style: ${ff.eduSchool.italic ? 'italic' : 'normal'} !important; color: ${ff.eduSchool.color} !important; font-size: ${BASE.eduSchool + ff.eduSchool.size}px !important; opacity: 1 !important; }
-      #live-preview .r-edu-year { font-weight: ${ff.eduYear.bold ? '700' : '400'} !important; font-style: ${ff.eduYear.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.eduYear + ff.eduYear.size}px !important; opacity: 1 !important; }
+      #live-preview .rh-name { font-weight: ${fmtBold ? '900' : (ff.name.bold ? '800' : '600')} !important; font-size: ${BASE.name + ff.name.size + fmtFontSize}px !important; }
+      #live-preview .rh-title { font-style: ${ff.title.italic || fmtItalic ? 'italic' : 'normal'} !important; font-size: ${BASE.title + ff.title.size + fmtFontSize}px !important; }
+      #live-preview .rh-contacts, #live-preview .rh-contacts span { font-size: ${BASE.contact + ff.contact.size + fmtFontSize}px !important; }
+      #live-preview .rs-label { text-decoration: ${ff.sectionLabel.underline || fmtUnderline ? 'underline' : 'none'} !important; font-size: ${10 + fmtFontSize}px !important; }
+      #live-preview .r-exp-role { font-weight: ${ff.expRole.bold ? '700' : '400'} !important; font-size: ${BASE.expRole + ff.expRole.size + fmtFontSize}px !important; text-decoration: ${ff.expRole.underline ? 'underline' : 'none'} !important; }
+      #live-preview .r-exp-meta { font-weight: ${ff.expCompany.bold ? '700' : '400'} !important; font-style: ${ff.expCompany.italic ? 'italic' : 'normal'} !important; color: ${ff.expCompany.color} !important; font-size: ${BASE.expCompany + ff.expCompany.size + fmtFontSize}px !important; opacity: 1 !important; }
+      #live-preview .r-exp-dates { font-weight: ${ff.expDates.bold ? '700' : '400'} !important; font-style: ${ff.expDates.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.expDates + ff.expDates.size + fmtFontSize}px !important; opacity: 1 !important; }
+      #live-preview .r-exp-bullets li { font-size: ${BASE.expBullets + ff.expBullets.size + fmtFontSize}px !important; line-height: ${1.5 + ff.expBullets.spacing * 0.1} !important; }
+      #live-preview .r-profile-text { font-weight: ${ff.profile.bold ? '700' : '400'} !important; font-style: ${ff.profile.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.profile + ff.profile.size + fmtFontSize}px !important; line-height: ${1.4 + (ff.profile.spacing||0) * 0.15} !important; opacity: 1 !important; }
+      #live-preview .r-str-tag { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size + fmtFontSize}px !important; }
+      #live-preview .r-str-item { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size + fmtFontSize}px !important; line-height: ${1.5 + (ff.strengths.spacing||0) * 0.15} !important; }
+      #live-preview .r-str-inline { font-weight: ${ff.strengths.bold ? '700' : '400'} !important; font-style: ${ff.strengths.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.strengths + ff.strengths.size + fmtFontSize}px !important; }
+      #live-preview .r-skl-tag { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size + fmtFontSize}px !important; }
+      #live-preview .r-skl-item { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size + fmtFontSize}px !important; line-height: ${1.5 + (ff.skills.spacing||0) * 0.15} !important; }
+      #live-preview .r-skl-cat { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${Math.max(9, BASE.skills + ff.skills.size + fmtFontSize - 1)}px !important; opacity: 1 !important; }
+      #live-preview .r-skl-val { font-weight: ${ff.skills.bold ? '700' : '400'} !important; font-size: ${BASE.skills + ff.skills.size + fmtFontSize}px !important; opacity: 1 !important; }
+      #live-preview .r-edu-degree { font-weight: ${ff.eduDegree.bold ? '700' : '400'} !important; font-size: ${BASE.eduDegree + ff.eduDegree.size + fmtFontSize}px !important; text-decoration: ${ff.eduDegree.underline ? 'underline' : 'none'} !important; }
+      #live-preview .r-edu-school { font-weight: ${ff.eduSchool.bold ? '700' : '400'} !important; font-style: ${ff.eduSchool.italic ? 'italic' : 'normal'} !important; color: ${ff.eduSchool.color} !important; font-size: ${BASE.eduSchool + ff.eduSchool.size + fmtFontSize}px !important; opacity: 1 !important; }
+      #live-preview .r-edu-year { font-weight: ${ff.eduYear.bold ? '700' : '400'} !important; font-style: ${ff.eduYear.italic ? 'italic' : 'normal'} !important; font-size: ${BASE.eduYear + ff.eduYear.size + fmtFontSize}px !important; opacity: 1 !important; }
       #live-preview .page-break { border: none; border-top: 2px dashed #d1d5db; margin: 8px 0; height: 18px; display: flex; align-items: center; justify-content: center; position: relative; background: #f9fafb; }
       #live-preview .page-break::after { content: '— Page 2 —'; font-size: 9px; color: #9ca3af; letter-spacing: 0.1em; position: absolute; background: #f9fafb; padding: 0 8px; }
     `;
@@ -1349,7 +1349,11 @@
   function toggleItalicTitle() { fmtItalic = !fmtItalic; document.getElementById('fmt-italic').classList.toggle('active', fmtItalic); applyAllFormatting(); }
   function toggleUnderlineSections() { fmtUnderline = !fmtUnderline; document.getElementById('fmt-underline').classList.toggle('active', fmtUnderline); applyAllFormatting(); }
   function adjustSpacing(d) { fmtSpacing = Math.max(-2, Math.min(4, fmtSpacing+d)); document.getElementById('spacing-val').textContent = fmtSpacing>0?'+'+fmtSpacing:fmtSpacing; applyAllFormatting(); }
-  function adjustFontSize(d) { fmtFontSize = Math.max(-2, Math.min(3, fmtFontSize+d)); document.getElementById('fontsize-val').textContent = fmtFontSize>0?'+'+fmtFontSize:fmtFontSize; applyAllFormatting(); }
+  function adjustFontSize(d) {
+    fmtFontSize = Math.max(-3, Math.min(6, fmtFontSize + d));
+    document.getElementById('fontsize-val').textContent = fmtFontSize > 0 ? '+' + fmtFontSize : fmtFontSize;
+    applyAllFormatting();
+  }
 
   function toggleFF(field, prop) { ff[field][prop] = !ff[field][prop]; const btn = document.getElementById(`ffmt-${field}-${prop}`); if (btn) btn.classList.toggle('active', ff[field][prop]); applyAllFormatting(); }
   function setFFColor(field, val) { ff[field].color = val; applyAllFormatting(); }
