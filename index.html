@@ -6,6 +6,7 @@
   <title>ResumeAI — Tailor your resume to every job</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -170,6 +171,26 @@
 
     footer { text-align:center; padding:32px 24px; border-top:1px solid var(--paper3); color:var(--ink3); font-size:12px; }
     footer a { color:var(--accent); text-decoration:none; }
+
+    /* ── PRINT / PDF ── */
+    @media print {
+      @page { size: letter; margin: 0; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: #fff !important; }
+      nav, .mode-bar, .builder-form, .builder-preview .preview-label,
+      .builder-preview .section-fmt-bar, .builder-preview > div:not(.preview-inner),
+      #result-section .action-row, #result-section #result-polish-wrap,
+      footer, .page-break, #page-pick, #page-tailor,
+      .color-swatch, #color-scheme-picker, .fmt-btn,
+      div[style*="Colour scheme"], div[style*="Formatting"] { display: none !important; }
+      .builder-preview { width: 100% !important; padding: 0 !important; background: #fff !important; position: static !important; height: auto !important; }
+      .preview-inner { box-shadow: none !important; border-radius: 0 !important; border: none !important; width: 100% !important; }
+      #live-preview { font-size: 12px !important; }
+      #live-preview .rb { padding: 12px 28px 20px !important; }
+      #live-preview .rh { padding: 20px 28px 14px !important; }
+      #page-build { display: block !important; }
+      #page-build.active { display: block !important; flex-direction: column !important; min-height: auto !important; }
+    }
     .fmt-btn { background:#fff; border:1.5px solid var(--paper3); border-radius:5px; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-size:12px; cursor:pointer; color:var(--ink); transition:all 0.15s; padding:0; flex-shrink:0; }
     .fmt-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
     .fmt-btn.active { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
@@ -922,7 +943,7 @@
   </div>
   <div class="action-row">
     <button class="btn-sec" onclick="resetResult()">Start over</button>
-    <button class="btn-pri" onclick="alert('Sign up to download as PDF — coming soon!')">Download PDF</button>
+    <button class="btn-pri" onclick="downloadPDF()">Download PDF</button>
     <button class="btn-pri" onclick="alert('Cover letter generator — coming soon!')">Generate cover letter</button>
   </div>
 </div>
@@ -1725,6 +1746,59 @@ Return ONLY raw JSON (no markdown):
     document.getElementById('result-section').style.display='none';
     document.getElementById('polish-banner').style.display='none';
     window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  async function downloadPDF() {
+    const preview = document.getElementById('live-preview');
+    if (!preview || preview.innerHTML.includes('Start filling in')) {
+      alert('Please build your resume first before downloading.');
+      return;
+    }
+
+    const name = document.getElementById('b-name')?.value || 'Resume';
+    const btn = document.querySelector('[onclick="downloadPDF()"]');
+
+    // Update button state
+    if (btn) { btn.textContent = 'Generating PDF...'; btn.disabled = true; }
+
+    // Hide page break markers
+    preview.querySelectorAll('.page-break').forEach(el => el.style.display = 'none');
+
+    // Clone the preview so we can style it without affecting the live view
+    const clone = preview.cloneNode(true);
+    clone.style.width = '794px'; // A4 width in px at 96dpi
+    clone.style.padding = '0';
+    clone.style.margin = '0';
+    clone.style.background = '#fff';
+    clone.style.fontSize = '12px';
+
+    // Apply the formatting stylesheet to the clone
+    const fmtStyle = document.getElementById('preview-fmt-style');
+    if (fmtStyle) {
+      const styleClone = fmtStyle.cloneNode(true);
+      // Update selectors to target clone instead of #live-preview
+      styleClone.textContent = fmtStyle.textContent.replace(/#live-preview /g, '');
+      clone.prepend(styleClone);
+    }
+
+    const options = {
+      margin:      [10, 10, 10, 10], // top, right, bottom, left in mm
+      filename:    `${name} Resume.pdf`,
+      image:       { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF:       { unit: 'mm', format: 'letter', orientation: 'portrait' },
+      pagebreak:   { mode: ['avoid-all', 'css'] }
+    };
+
+    try {
+      await html2pdf().set(options).from(clone).save();
+    } catch(err) {
+      alert('PDF generation failed. Please try again.');
+      console.error(err);
+    } finally {
+      if (btn) { btn.textContent = 'Download PDF'; btn.disabled = false; }
+      preview.querySelectorAll('.page-break').forEach(el => el.style.display = '');
+    }
   }
 
   // ── INIT ──────────────────────────────────────────────────────────────
